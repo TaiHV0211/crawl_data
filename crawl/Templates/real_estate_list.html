@@ -1,0 +1,143 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div class="container text-center">
+    <div class="row pt-5">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-12">Real Estate</h1>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="container py-5">
+  <div class="row">
+        <form action="{% url 'real_estate_search' %}" method="get">
+          <div class="row" style="margin-bottom: 30px;">
+      <div class="form-group col-3">
+        <label for="minPrices" class="col-sm-4">Min prices</label>
+        <input
+          type="number"
+          class="form-control col-md-8"
+          id="minPrices"
+          onblur="checkPrices()"
+          name="minPrices"
+          value="0"
+        />
+        <div id="minPricesError"></div>
+      </div>
+
+      <div class="form-group col-3">
+        <label for="maxPrices" class="col-sm-4">Max prices</label>
+        <input
+          type="number"
+          class="form-control col-md-8"
+          id="maxPrices"
+          onblur="checkPrices()"
+          name="maxPrices"
+          value="100"
+        />
+        <div id="maxPricesError"></div>
+    </div>
+
+      <div class="form-group col-3">
+        <label for="address" class="col-sm-4">Address</label>
+        <input
+          type="text"
+          class="form-control col-md-8"
+          id="address"
+          name="address"
+          value=" "
+        />
+    </div>
+
+      <div class="form-group col-3">
+            <label for="maxPrices" class="col-sm-4"></label>
+            <input type="submit" class="form-control btn btn-outline-info" value="Search"></input>
+    </div>
+  </div>
+        </form>
+  <div class="row">
+    <div class="col-lg-12 mx-auto">
+      <div class="card rounded-0 border-0 shadow">
+        <div class="card-body p-5">
+          <!--  Bootstrap table-->
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Bedrooms</th>
+                  <th scope="col">Bathrooms</th>
+                  <th scope="col">Agent_name</th>
+                  <th scope="col">Aria_code</th>
+                  <th scope="col">Telephones</th>
+                  <th scope="col">Prices</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for real_estate in real_estates %}
+                <tr scope="row">
+                  <td>{{ real_estate.id }}</td>
+                  <td>{{ real_estate.address }}</td>
+                  <td>{{ real_estate.bedrooms }}</td>
+                  <td>{{ real_estate.bathrooms }}</td>
+                  <td>{{ real_estate.agent_name }}</td>
+                  <td>{{ real_estate.aria_code }}</td>
+                  <td>{{ real_estate.telephones }}</td>
+                  <td>${{ real_estate.prices }}</td>
+                  <td>
+                    <a
+                      role="button"
+                      class="btn btn-outline-primary"
+                      href="view/{{real_estate.id}}"
+                      >Details</a
+                    >
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                {% if real_estates.has_previous %}
+                <a
+                  class="page-link"
+                  href="?page={{ real_estates.previous_page_number }}"
+                  aria-label="Previous"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                {% endif %}
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#"
+                  >Page {{ real_estates.number }} of {{real_estates.paginator.num_pages }}.</a
+                >
+              </li>
+              <li class="page-item">
+                {% if real_estates.has_next %}
+                <a
+                  class="page-link"
+                  href="?page={{ real_estates.next_page_number }}"
+                  aria-label="Next"
+                >
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+                {% endif %}
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

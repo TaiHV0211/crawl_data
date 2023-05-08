@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+{% block detail %}
+<link
+  rel="stylesheet"
+  href="https://sachinchoolur.github.io/lightslider/dist/css/lightslider.css"
+/>
+<div class="container-fluid mt-2 mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-5 pr-2">
+      <div class="card">
+        <div class="demo">
+          <ul id="lightSlider">
+            <li data-thumb="{{real_estate.highrespath}}">
+              <img src="{{real_estate.highrespath}}" />
+            </li>
+            <li data-thumb="{{real_estate.medrespath}}">
+              <img src="{{real_estate.medrespath}}" />
+            </li>
+            <li data-thumb="{{real_estate.lowrespath}}">
+              <img src="{{real_estate.lowrespath}}" />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="card">
+        <div class="d-flex flex-row align-items-center">
+          <div class="p-ratings">
+            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+          </div>
+          <span class="ml-1">5.0</span>
+        </div>
+        <div class="about">
+          <span class="font-weight-bold">{{real_estate.agent_name}} </span>
+          <h4 class="font-weight-bold">${{real_estate.prices}} </h4>
+        </div>
+        <div class="buttons">
+          <a class="btn btn-outline-warning btn-long cart" href="/">
+            Back to dashboard
+          </a>
+        </div>
+        <hr />
+        <div class="product-description">
+          <div>
+            <span class="font-weight-bold">Address:</span><span> {{ real_estate.address }}</span>
+          </div>
+          <div class="d-flex flex-row align-items-center">
+            <i class="fa fa-calendar-check-o"></i>
+            <span class="ml-1"><span class="font-weight-bold">Contact:</span><span> {{ real_estate.telephones }}</span></span>
+          </div>
+          <div class="mt-2">
+            <span class="font-weight-bold">Description</span>
+            <p>
+                {{real_estate.descriptions}}
+            </p>
+            <div class="bullets">
+              <div class="d-flex align-items-center">
+                <span class="dot"></span>
+                <span class="bullet-text"><span class="font-weight-bold">Bedrooms:</span><span> {{ real_estate.bedrooms }}</span></span>
+              </div>
+              <div class="d-flex align-items-center">
+                <span class="dot"></span>
+                <span class="bullet-text"><span class="font-weight-bold">Bathrooms:</span><span> {{ real_estate.bathrooms }}</span></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
